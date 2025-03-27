@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-
-
     # Local app
     "accounts",
-    "pages"
+    "pages",
+
+    # third party
     "crispy_forms",
     "crispy_bootstrap5",
 ]
@@ -138,7 +138,7 @@ LOGIN_REDIRECT_URL = "home"
 # بعد از اینکه کاربر روی دکه خروج از جساب کاربری زد ان را به صفحه home ببر
 LOGOUT_REDIRECT_URL = "home"
 
-
+# crispy forms settings
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
