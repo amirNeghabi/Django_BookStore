@@ -13,4 +13,7 @@ urlpatterns = [
 
     # URL برای ثبت‌نام کاربر
     path('accounts/', include('accounts.urls')),
+
+#     اگر کاربری اسم books را وارد کرد اون رو ببر به url مرتبط با اپ کتاب
+    path('books/', include('books.urls')),
 ]
