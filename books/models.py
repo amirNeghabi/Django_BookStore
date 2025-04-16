@@ -1,4 +1,8 @@
+from audioop import reverse
+
 from django.db import models
+from django.urls import reverse
+
 
 class Book(models.Model):
 
@@ -11,4 +15,8 @@ class Book(models.Model):
     def __str__(self):
         # در ادمین پنل عنوان کتاب و نویسنده را نشان بده
         return f'{self.author}: {self.title}'
+
+    # ادرس هر شیی ساخته شده از این مدل را به ما دهد
+    def get_absolute_url(self):
+        return reverse('book_detail',args=[self.pk])
 

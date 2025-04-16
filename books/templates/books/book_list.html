@@ -4,7 +4,12 @@
 {% block content %}
 
     {% for book in books %}
-        <h1>{{ book.title }}</h1>
+{#        اراه اول لینک گذاری روی تیتر کتاب ها#}
+{#        <a href="{% url 'book_detail' book.id %}"> <h1>{{ book.title }}</h1></a>#}
+        <a href="{{ book.get_absolute_url }}"><h1>{{ book.title }}</h1></a>
+{#        راه دوم لینک گذاری روی تیتر کتاب ها#}
+        <p>{{ book.descriptions}}</p>
+        <br>
     {% endfor %}
 
 {% endblock  %}
