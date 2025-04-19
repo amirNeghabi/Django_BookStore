@@ -16,3 +16,9 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = "books/book_detail.html"
+
+#     نمایش صفحه حاوی فرم ساخت کتاب به کاربر
+class BookCreateView(generic.CreateView):
+    model = Book
+    template_name = "books/book_create.html"
+    fields = ["title", "author", "descriptions","price"]
