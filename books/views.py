@@ -1,8 +1,10 @@
 from django.shortcuts import render
 # استفاده از کلاس در ساخت ویو
 from django.views import generic
+from django.urls import reverse_lazy
 # معیین کردن مدلی که قراره براش ویو بسازیم
 from .models import Book
+
 
 
 # نمایش لیست کتاب ها در صفحه اصلی به کاربر
@@ -28,3 +30,10 @@ class BookUpdateView(generic.UpdateView):
     model = Book
     fields = ["title", "author", "descriptions"]
     template_name = 'books/book_update.html'
+
+# نمایش صفحه ای برای حذف متاب توسط کاربر
+class BookDeleteView(generic.DeleteView):
+    model = Book
+    template_name = "books/book_delete.html"
+    # بعد ااز حذف کتاب مد نطر کاربر ان را به صفحه لیست کتاب ها ببر
+    success_url = reverse_lazy('book_list')
