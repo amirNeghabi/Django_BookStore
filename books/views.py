@@ -22,3 +22,9 @@ class BookCreateView(generic.CreateView):
     model = Book
     template_name = "books/book_create.html"
     fields = ["title", "author", "descriptions","price"]
+
+#     نمایش صفخه برای اینکه کاربر بتواند مااب های خود را ویرایش کند
+class BookUpdateView(generic.UpdateView):
+    model = Book
+    fields = ["title", "author", "descriptions"]
+    template_name = 'books/book_update.html'

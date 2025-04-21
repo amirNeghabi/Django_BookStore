@@ -7,6 +7,7 @@
     <p>{{ book.author }}</p>
     <h4>{{ book.price }}</h4>
     <br>
+    <a href="{% url 'book_update' book.id %}"><button class="btn btn-info" type="button">ویرایش</button></a> |
     <a href="{% url 'book_list' %}">لیست همه کتاب ها</a>
 
 {% endblock  %}

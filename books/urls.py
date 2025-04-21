@@ -1,5 +1,9 @@
 from django.urls import path
-from .views import BookListView, BookDetailView, BookCreateView
+from .views import(
+BookListView,
+BookDetailView,
+BookCreateView,
+BookUpdateView)
 
 urlpatterns = [
     # ویو برای نمایش صفحه اول سایت که حاوی لیست کتاب هاست
@@ -7,4 +11,5 @@ urlpatterns = [
 #     ویو برای نمایش صفحه جزییات هر کتاب
     path('<int:pk>',BookDetailView.as_view(),name='book_detail'),
     path('create/',BookCreateView.as_view(),name='book_create'),
+    path('<int:pk>/edit/',BookUpdateView.as_view(),name='book_update'),
 ]
