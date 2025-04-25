@@ -8,9 +8,9 @@
 {#        <a href="{% url 'book_detail' book.id %}"> <h1>{{ book.title }}</h1></a>#}
 
     {#        راه دوم لینک گذاری روی تیتر کتاب ها#}
-        <a href="{{ book.get_absolute_url }}"><h1>{{ book.title }}</h1></a>
+        <a href="{{ book.get_absolute_url }}"><h1>{{ book.title | capfirst }}</h1></a>
 
-        <p>{{ book.descriptions}}</p>
+        <p>{{ book.descriptions|truncatewords:10}}</p>
         <br>
     {% endfor %}
     <a href="{% url 'book_create' %}">اضافه کردن کتاب جدید</a>
