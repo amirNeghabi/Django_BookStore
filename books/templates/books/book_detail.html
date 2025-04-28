@@ -1,9 +1,10 @@
 {% extends "_base.html" %}
+{% load book_tags %}
 {% block page_title %}جزییات کتاب{{ book.title }}{% endblock %}
 
 {% block content %}
     <h1>{{ book.title }}</h1>
-    <p>{{ book.descriptions}}</p>
+    <p>{{ book.descriptions|two_lower:'Description'| linebreaks}}</p>
     <p>{{ book.author }}</p>
     <h4>{{ book.price }}</h4>
     <br>
