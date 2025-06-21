@@ -11,6 +11,9 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block styles %}
+        
+    {% endblock %}
 
     <title>{% block page_tittle %}{% endblock page_tittle %}</title>
 </head>
@@ -18,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info" dir="rtl">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="icons/book.png" alt="" height="30"
+            <img src="{% static 'icons/book.png' %}" alt="" height="30"
                  class="d-inline-block align-text-top">
         </a>
         <a class="navbar-brand mx-3" href="#">کتاب یار</a>
@@ -28,12 +31,33 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">خانه</a>
-                <a class="nav-link" href="#">اضافه کردن کتاب</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'book_list' %}">خانه</a>
+                <a class="nav-link" href="{% url 'book_create' %}">اضافه کردن کتاب</a>
             </div>
         </div>
-        <div class="mx-2 text-white">خوش آمدی محمدهادی | <a class="link-light text-decoration-none" href="#">خروج</a>
-        </div>
+        <div class="mx-2 text-white">
+            {% if user.is_authenticated %}
+                خوش آمدی {{ user.username }} |
+                <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">خروج</button>
+                </form>
+            {% else %}
+                <div>
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">ورود</button>
+                    </form>
+                </div> <span>یا</span>
+                <div></div>
+                <form action="{% url 'signup' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit">ثبت نام</button>
+                </form></div>
+                
+            {% endif %}
+
+    </div>
     </div>
 </nav>
 {#برای اینکه فاطله از کناره در فرم رعایت شود#}
