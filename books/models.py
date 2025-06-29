@@ -11,6 +11,7 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     # قیمت کتاب برحسب عدد اعشاری
     price = models.DecimalField(max_digits=5, decimal_places=2)
+    cover= models.ImageField(upload_to='covers/',blank=True)
 
     def __str__(self):
         # در ادمین پنل عنوان کتاب و نویسنده را نشان بده

@@ -23,12 +23,12 @@ class BookDetailView(generic.DetailView):
 class BookCreateView(generic.CreateView):
     model = Book
     template_name = "books/book_create.html"
-    fields = ["title", "author", "descriptions","price"]
+    fields = ["title", "author", "descriptions","price","cover"]
 
 #     نمایش صفخه برای اینکه کاربر بتواند مااب های خود را ویرایش کند
 class BookUpdateView(generic.UpdateView):
     model = Book
-    fields = ["title", "author", "descriptions"]
+    fields = ["title", "author", "descriptions","cover"]
     template_name = 'books/book_update.html'
 
 # نمایش صفحه ای برای حذف متاب توسط کاربر
