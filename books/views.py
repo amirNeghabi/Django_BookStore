@@ -10,6 +10,7 @@ from .models import Book
 # نمایش لیست کتاب ها در صفحه اصلی به کاربر
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 4
     template_name = "books/book_list.html"
     # اسم کتاب های موجود در صفحه را books بزار
     context_object_name = "books"
@@ -22,6 +23,7 @@ class BookDetailView(generic.DetailView):
 #     نمایش صفحه حاوی فرم ساخت کتاب به کاربر
 class BookCreateView(generic.CreateView):
     model = Book
+
     template_name = "books/book_create.html"
     fields = ["title", "author", "descriptions","price","cover"]
 
