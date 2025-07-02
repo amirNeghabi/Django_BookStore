@@ -23,12 +23,12 @@ class Book(models.Model):
         return reverse('book_detail',args=[self.pk])
 
 # مقادیری از بخش کامنت سایت که باید در دیتابیس ذخیره شوند
-class COmment(models.Model):
+class Comment(models.Model):
 
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     book = models.ForeignKey(Book,on_delete=models.CASCADE)
     text = models.TextField()
-    datetime_creatr = models.DateTimeField(auto_now_add=True)
+    datetime_created = models.DateTimeField(auto_now_add=True)
 
     def __ste__(self):
         return self.text
