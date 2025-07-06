@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 # استفاده از کلاس در ساخت ویو
 from django.views import generic
+
 from django.urls import reverse_lazy
 # معیین کردن مدلی که قراره براش ویو بسازیم
 from .models import Book
@@ -16,9 +17,21 @@ class BookListView(generic.ListView):
     context_object_name = "books"
 
 #     نمایش جزییات مرتبط با هر کتاب موجود در db
-class BookDetailView(generic.DetailView):
-    model = Book
-    template_name = "books/book_detail.html"
+# class BookDetailView(generic.DetailView):
+#     model = Book
+#     template_name = "books/book_detail.html"
+# -----
+# Book_list_view حاوی بخش کامنت
+# با پیاده سازی
+# functional view
+def book_detail_view(request, pk):
+    # get book object
+    book = get_object_or_404(Book, pk=pk)
+#     get book comments
+    book_comments = book.comments.all()
+    return render(request,'books/book_detail.html',{'book':book,'comments':book_comments})
+
+
 
 #     نمایش صفحه حاوی فرم ساخت کتاب به کاربر
 class BookCreateView(generic.CreateView):
