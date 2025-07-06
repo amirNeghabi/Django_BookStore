@@ -5,6 +5,7 @@ from django.views import generic
 from django.urls import reverse_lazy
 # معیین کردن مدلی که قراره براش ویو بسازیم
 from .models import Book
+from.forms import CommentForm
 
 
 
@@ -29,7 +30,22 @@ def book_detail_view(request, pk):
     book = get_object_or_404(Book, pk=pk)
 #     get book comments
     book_comments = book.comments.all()
-    return render(request,'books/book_detail.html',{'book':book,'comments':book_comments})
+    if request.method =="POST":
+        # از روی محتوای ارسالی کاربر در فرم یک فرم پر شده بساز
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.book = book
+            new_comment.user = request.user
+            new_comment.save()
+            comment_form = CommentForm()
+    else:
+        comment_form = CommentForm
+    return render(request,'books/book_detail.html',{
+        'book':book,
+        'comments':book_comments,
+        'comment_form':comment_form
+    ,})
 
 
 
