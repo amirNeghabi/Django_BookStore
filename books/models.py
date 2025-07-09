@@ -7,6 +7,9 @@ from django.contrib.auth import get_user_model
 # ادیری از کتاب که باید دز دیتابیس ذخیره شوند
 class Book(models.Model):
 
+    # سازنده متاب را ذهخیره میکنیم
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
     title = models.CharField(max_length=100)
     descriptions = models.TextField()
     author = models.CharField(max_length=100)
