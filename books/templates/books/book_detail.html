@@ -49,16 +49,16 @@
                             {% if comment.is_active %}
                                 <div class="border-bottom mb-3">
                                     <h5 class="mb-3">{{ comment.user.username }}</h5>
-                                {% if comment.recommend %}
-                                    <p>این کتاب را پیشنهاد میکنم.</p>
-                                {% else %}
-                                    <p>این کتاب را پیشمهاد نمی کنم.</p>
-                                {% endif %}
-                                <p>{{ comment.text|linebreaks }}</p>
+                                    {% if comment.recommend %}
+                                        <p>این کتاب را پیشنهاد میکنم.</p>
+                                    {% else %}
+                                        <p>این کتاب را پیشمهاد نمی کنم.</p>
+                                    {% endif %}
+                                    <p>{{ comment.text|linebreaks }}</p>
                                 </div>
                             {% endif %}
 
-                         {% endfor %}
+                        {% endfor %}
 
                     </div>
                 </div>
