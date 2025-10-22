@@ -1,0 +1,114 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}سبد خرید{% endblock %}
+
+{% block content %}
+<h4 class="mb-4 fw-bold">🛒 سبد خرید</h4>
+
+<!-- نمایش پیام‌ها -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% if items %}
+<div class="row">
+  <!-- بخش لیست محصولات -->
+  <div class="col-lg-8">
+    <div class="card border-0 shadow-sm mb-3">
+      <div class="card-body p-0">
+        <table class="table align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">محصول</th>
+              <th scope="col" class="text-center">قیمت واحد</th>
+              <th scope="col" class="text-center">تعداد</th>
+              <th scope="col" class="text-center">جمع جزء</th>
+              <th scope="col" class="text-center">عملیات</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td>
+                <div class="d-flex align-items-center">
+                  {% if item.book.cover %}
+                    <img src="{{ item.book.cover.url }}" alt="{{ item.book.title }}" class="rounded me-2" width="50" height="70">
+                  {% else %}
+                    <img src="{% static 'images/default_book.jpg' %}" alt="{{ item.book.title }}" class="rounded me-2" width="50" height="70">
+                  {% endif %}
+                  <div>
+                    <div class="fw-bold">{{ item.book.title }}</div>
+                    <small class="text-muted">{{ item.book.author }}</small>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center fw-bold text-success">
+                {{ item.book.price }} تومان
+              </td>
+              <td class="text-center">
+                <form action="{% url 'cart_update' item.id %}" method="post" class="d-inline-flex align-items-center">
+                  {% csrf_token %}
+                  <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm w-50 text-center">
+                  <button type="submit" class="btn btn-sm btn-outline-primary ms-2">به‌روزرسانی</button>
+                </form>
+              </td>
+              <td class="text-center fw-bold">
+                {{ item.get_total_price }} تومان
+              </td>
+              <td class="text-center">
+                <form action="{% url 'cart_remove' item.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-sm btn-outline-danger">
+                    حذف
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <a href="/books/" class="btn btn-outline-secondary">← ادامه خرید</a>
+      <form action="{% url 'cart_clear' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger">حذف همه موارد</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- بخش جمع کل و تسویه حساب -->
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 sticky-top" style="top: 80px;">
+      <div class="card-body">
+        <h5 class="fw-bold mb-3">خلاصه سفارش</h5>
+        <div class="d-flex justify-content-between mb-2">
+          <span>جمع کل:</span>
+          <span class="fw-bold text-success">{{ cart.total_price }} تومان</span>
+        </div>
+        <hr>
+        <a href="{% url 'order_checkout' %}" class="btn btn-success w-100 py-2">
+          ثبت سفارش و تسویه حساب
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<!-- حالت خالی -->
+<div class="text-center py-5">
+  <img src="{% static 'images/empty_cart.png' %}" alt="empty" class="mb-3" style="max-width: 160px;">
+  <h5 class="fw-bold mb-2">سبد خرید شما خالی است</h5>
+  <p class="text-muted mb-4">برای خرید کتاب، به فروشگاه ما سر بزنید.</p>
+  <a href="/books/" class="btn btn-primary">رفتن به فروشگاه</a>
+</div>
+{% endif %}
+{% endblock %}

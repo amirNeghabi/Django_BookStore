@@ -1,73 +1,63 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}فروشگاه کتاب{% endblock %}</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap (CDN — سریع و قابل اطمینان). اگر می‌خواهی آفلاین، بعداً فایل محلی قرار بده -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- استایل اختصاصی -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% block styles %}
-
-    {% endblock %}
-
-    <title>{% block page_tittle %}{% endblock page_tittle %}</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-info" dir="rtl">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="{% static 'icons/book.png' %}" alt="" height="30"
-                 class="d-inline-block align-text-top">
-        </a>
-        <a class="navbar-brand mx-3" href="#">کتاب یار</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{% url 'book_list' %}">خانه</a>
-                <a class="nav-link" href="{% url 'book_create' %}">اضافه کردن کتاب</a>
-            </div>
-        </div>
-        <div class="mx-2 text-white">
-            {% if user.is_authenticated %}
-                خوش آمدی {{ user.username }} |
-                <form action="{% url 'logout' %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit">خروج</button>
-                </form>
-            {% else %}
-                <div>
-                    <form action="{% url 'login' %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit">ورود</button>
-                    </form>
-                </div> <span>یا</span>
-                <div></div>
-                <form action="{% url 'signup' %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit">ثبت نام</button>
-                </form></div>
 
-            {% endif %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/books/">
+      <img src="{% static 'images/logo.png' %}" alt="logo" width="36" height="36" class="me-2">
+      <span class="fw-bold">فروشگاه کتاب</span>
+    </a>
 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="/books/">خانه</a></li>
+        <li class="nav-item"><a class="nav-link" href="/orders/cart/">سبد خرید</a></li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="/accounts/profile/">سلام {{ user.username }}</a></li>
+          <li class="nav-item"><a class="nav-link text-danger" href="/accounts/logout/">خروج</a></li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="/accounts/login/">ورود</a></li>
+          <li class="nav-item"><a class="nav-link" href="/accounts/signup/">ثبت‌نام</a></li>
+        {% endif %}
+      </ul>
     </div>
-    </div>
+  </div>
 </nav>
-{#برای اینکه فاطله از کناره در فرم رعایت شود#}
-<div class="container">
 
-    {% block content %}
+<!-- Main container -->
+<main class="container my-4">
+    {% block content %}{% endblock %}
+</main>
 
-    {% endblock content %}
-</div>
+<!-- Footer -->
+<footer class="bg-light border-top py-3 mt-5">
+  <div class="container text-center small text-muted">© 2025 فروشگاه کتاب — پروژه دانشگاهی</div>
+</footer>
 
-
+<!-- Bootstrap JS (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- در صورت نیاز اسکریپت‌های اختصاصی قرار بده -->
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

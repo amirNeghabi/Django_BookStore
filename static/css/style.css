@@ -1,21 +1,50 @@
-@font-face {
-    font-family: "BYekan";
-    src: url("../fonts/BYekan+.ttf");
+/* ================================
+   استایل اختصاصی پروژه Book Store
+   ================================ */
+
+/* فونت عمومی سایت */
+body {
+    font-family: Vazirmatn, Tahoma, sans-serif;
+    background-color: #f8f9fa;
 }
-@font-face {
-    font-family: "BYekan";
-    src: url("../fonts/BYekan+ Bold.ttf");
+
+/* navbar */
+.navbar {
+    margin-bottom: 20px;
+}
+
+/* لینک‌های navbar */
+.navbar .nav-link {
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.navbar .nav-link:hover {
+    color: #ffc107;
+}
+
+/* فوتر */
+footer {
+    font-size: 14px;
+}
+
+/* فرم‌ها */
+form label {
     font-weight: bold;
+    margin-top: 10px;
 }
 
-* {
-    font-family: 'BYekan', sans-serif;
-    line-height: 1.8rem;
+form input, form select {
+    margin-bottom: 10px;
 }
 
-/* SM breakpoint */
-@media (min-width: 576px) {
-    /* CUSTOM WIDTHS */
-    .w-sm-75 { width: 75%!important; }
+/* دکمه‌ها */
+.btn-primary {
+    background-color: #198754;
+    border-color: #198754;
+}
 
+.btn-primary:hover {
+    background-color: #157347;
+    border-color: #146c43;
 }

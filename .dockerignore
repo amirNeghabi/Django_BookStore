@@ -1,0 +1,29 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+env/
+.venv/
+
+# Ignore local database files
+*.sqlite3
+db.sqlite3
+
+# Ignore git repository files
+.git/
+.gitignore
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore media uploads if you want to keep them out of container
+media/

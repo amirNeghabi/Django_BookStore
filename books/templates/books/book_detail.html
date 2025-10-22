@@ -4,6 +4,8 @@
 {% block page_title %}جزییات کتاب{{ book.title }}{% endblock %}
 
 {% block content %}
+    <a href="{% url 'add_to_cart' book.id %}">افزودن به سبد</a>
+
     <div class="container mt-5" dir="rtl">
         <div class="">
             <div class="">
@@ -25,9 +27,11 @@
                             <h5 class="small my-1"><span class="text-muted">نویسنده: </span>{{ book.author }}</h5>
                             <h4 class="small my-1"><span class="text-muted">سازنده: </span>{{ book.user.username }}</h4>
                             <h5 class="small my-1"><span class="text-muted">انتشارات: </span>هوزمزد</h5>
-                            <a href="{% url 'book_update' book.id %}">ویرایش کتاب</a>
-                            <span>|</span>
-                            <a href="{% url 'book_delete' book.id %}">حذف کتاب</a>
+                            {% if book.user == user %}
+                                <a href="{% url 'book_update' book.id %}">ویرایش کتاب</a>
+                                <span>|</span>
+                                <a href="{% url 'book_delete' book.id %}">حذف کتاب</a>
+                            {% endif %}
                         </div>
                         <div class="col-xs-12 col-md-3 d-flex flex-column">
                             <h3 class="align-self-center pt-2 text-muted align-self-md-end">

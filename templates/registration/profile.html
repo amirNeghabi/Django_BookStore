@@ -1,0 +1,26 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">پروفایل کاربری</h2>
+
+    <div class="card p-3 mb-4">
+        <p><strong>نام کاربری:</strong> {{ user.username }}</p>
+        <p><strong>ایمیل:</strong> {{ user.email }}</p>
+    </div>
+
+    <h4>سفارش‌های من</h4>
+    {% if orders %}
+        <ul class="list-group mt-3">
+            {% for order in orders %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    سفارش شماره {{ order.id }}
+                    <span>{{ order.created_at|date:"Y/m/d H:i" }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted mt-3">شما هنوز سفارشی ثبت نکرده‌اید.</p>
+    {% endif %}
+</div>
+{% endblock %}

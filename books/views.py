@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from .models import Book
 from.forms import CommentForm
 # برای بررسی ثبت نام کاربر در کلاس ویوها
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 # برای بررسی ثبت نام کاربر در functionalviews
 from django.contrib.auth.decorators import login_required
 
@@ -59,15 +59,28 @@ class BookCreateView( LoginRequiredMixin, generic.CreateView):
     template_name = "books/book_create.html"
     fields = ["title", "author", "descriptions","price","cover"]
 
+
 #     نمایش صفخه برای اینکه کاربر بتواند مااب های خود را ویرایش کند
-class BookUpdateView( LoginRequiredMixin, generic.UpdateView):
+class BookUpdateView( LoginRequiredMixin,UserPassesTestMixin, generic.UpdateView):
     model = Book
     fields = ["title", "author", "descriptions","cover"]
     template_name = 'books/book_update.html'
 
+    def test_func(self):
+        # سازنده کتاب را پیدا میکنیم
+        obj = self.get_object()
+        # آیا سازنده کتاب همون فردی هست ک loginکرده یا ن؟
+        return obj.user == self.request.user
+
 # نمایش صفحه ای برای حذف متاب توسط کاربر
-class BookDeleteView( LoginRequiredMixin, generic.DeleteView):
+class BookDeleteView( LoginRequiredMixin,UserPassesTestMixin, generic.DeleteView):
     model = Book
     template_name = "books/book_delete.html"
     # بعد ااز حذف کتاب مد نطر کاربر ان را به صفحه لیست کتاب ها ببر
     success_url = reverse_lazy('book_list')
+
+    def test_func(self):
+        # سازنده کتاب را پیدا میکنیم
+        obj = self.get_object()
+        # آیا سازنده کتاب همون فردی هست ک loginکرده یا ن؟
+        return obj.user == self.request.user

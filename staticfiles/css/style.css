@@ -1,0 +1,85 @@
+/* style.css — شخصی‌سازی ظاهری شبیه ketabchi (ساده و سبک) */
+
+/* فونت و پس‌زمینه */
+body {
+  background: #f5f6f8;
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  color: #222;
+}
+
+/* hero */
+.hero {
+  background: linear-gradient(90deg, #ffffff 0%, #f8fafb 100%);
+}
+
+/* chips دسته‌ها */
+.chip {
+  background: #fff;
+  color: #333;
+  border: 1px solid #e6e6e6;
+}
+
+/* کارت محصول */
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  background: #fff;
+}
+
+/* عنوان کتاب کوتاه شده */
+.card-title {
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+/* قیمت */
+.card .fw-bold {
+  color: #198754; /* سبز نرم */
+}
+
+/* دکمه افزودن */
+.btn-success {
+  background-color: #198754;
+  border: 1px solid #198754;
+}
+
+/* جزئیات ریسپانسیو */
+@media (max-width: 576px) {
+  .card-img-top { height: 160px; }
+}
+
+/* کم کردن حاشیه‌های پیش‌فرض قالب */
+.navbar .navbar-brand img { margin-left: 8px; }
+/* سبد خرید */
+.table td, .table th {
+  vertical-align: middle;
+}
+
+.table img {
+  object-fit: cover;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.sticky-top {
+  position: sticky;
+}
+
+/* حالت خالی سبد خرید */
+.empty-cart img {
+  max-width: 200px;
+  opacity: 0.85;
+}

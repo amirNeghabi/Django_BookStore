@@ -1,25 +1,18 @@
 {% extends '_base.html' %}
-{% load crispy_forms_tags %}
 
-{% block page_title %}Sign Up{% endblock page_title %}
 {% block content %}
-    <div class="d-flex justify-content-center mt-5" dir="rtl">
-        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-5 col-xs-6 bg-white m-3 m-sm-5 border rounded px-4 pt-4 pb-3 shadow">
-            <form method="post">
-                {% csrf_token %}
-                <h1 class="text-center">ثبت نام</h1>
-                {{ form|crispy }}
+<div class="container" style="max-width: 400px; margin-top: 50px;">
+    <h2 class="mb-4 text-center">ثبت‌نام</h2>
 
-                <div class="d-flex justify-content-between align-items-center">
-                 
-                </div>
-                <button type="submit" class="btn btn-success mt-3 w-100">تایید</button>
-                <div class="line-with-middle-sep">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
 
+        <button type="submit" class="btn btn-success w-100">ثبت‌نام</button>
+    </form>
 
-            </form>
-        </div>
-
+    <div class="mt-3 text-center">
+        <p>حساب کاربری دارید؟ <a href="{% url 'login' %}">وارد شوید</a></p>
     </div>
-
-{% endblock content %}
+</div>
+{% endblock %}

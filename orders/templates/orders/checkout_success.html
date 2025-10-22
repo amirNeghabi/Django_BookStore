@@ -1,0 +1,7 @@
+{% extends '_base.html' %}
+{% block content %}
+<h2>سفارش با موفقیت ثبت شد</h2>
+<p>شماره سفارش: {{ order.id }}</p>
+<p>مبلغ کل: {{ order.total }} تومان</p>
+<a href="/">بازگشت به صفحه اصلی</a>
+{% endblock %}
